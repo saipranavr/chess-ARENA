@@ -9,12 +9,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
-        <header className="App-header">
-          <h1>Arena Social Chess Puzzles</h1>
-        </header>
-        <main>
-          <Puzzle />
-        </main>
+        <Puzzle />
       </div>
     </QueryClientProvider>
   );
