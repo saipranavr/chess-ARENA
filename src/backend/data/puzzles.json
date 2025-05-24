@@ -1,0 +1,25 @@
+{
+  "puzzles": [
+    {
+      "puzzleId": "puzzle1",
+      "initialFEN": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1",
+      "solutionPath": ["d8h4", "g2g3", "h4e4"],
+      "difficulty": "Easy",
+      "description": "Black to play and win material"
+    },
+    {
+      "puzzleId": "puzzle2",
+      "initialFEN": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1",
+      "solutionPath": ["d8h4", "g2g3", "h4e4"],
+      "difficulty": "Medium",
+      "description": "Black to play and checkmate in 2"
+    },
+    {
+      "puzzleId": "puzzle3",
+      "initialFEN": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1",
+      "solutionPath": ["d8h4", "g2g3", "h4e4"],
+      "difficulty": "Hard",
+      "description": "Black to play and find the winning combination"
+    }
+  ]
+} 
