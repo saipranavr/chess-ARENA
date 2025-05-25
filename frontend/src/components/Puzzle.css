@@ -23,6 +23,10 @@
   background-color: #1a1a1a;
   border-radius: 8px;
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .difficulty {
@@ -39,8 +43,8 @@
   line-height: 1.5;
 }
 
-.hint-button {
-  background-color: #1d9bf0;
+.undo-button {
+  background-color: #dc3545;
   color: white;
   border: none;
   border-radius: 20px;
@@ -48,20 +52,18 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  min-width: 120px;
 }
 
-.hint-button:hover {
-  background-color: #1a8cd8;
+.undo-button:hover:not(.disabled) {
+  background-color: #c82333;
 }
 
-.hint {
-  margin-top: 12px;
-  padding: 12px;
-  background-color: #2f3336;
-  border-radius: 6px;
-  font-size: 14px;
-  line-height: 1.4;
+.undo-button.disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 .puzzle-loading,
