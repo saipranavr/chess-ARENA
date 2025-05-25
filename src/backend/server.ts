@@ -23,21 +23,17 @@ try {
   process.exit(1);
 }
 
-// Helper function to get current puzzle based on date
-const getCurrentPuzzleIndex = () => {
-  const today = new Date();
-  const startOfYear = new Date(today.getFullYear(), 0, 0);
-  const diff = today.getTime() - startOfYear.getTime();
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-  return dayOfYear % puzzlesData.puzzles.length;
+// Helper function to get a random puzzle
+const getRandomPuzzle = () => {
+  const randomIndex = Math.floor(Math.random() * puzzlesData.puzzles.length);
+  return puzzlesData.puzzles[randomIndex];
 };
 
 // API Endpoint for current puzzle
 app.get('/api/puzzle/current', (req, res) => {
   try {
-    const currentIndex = getCurrentPuzzleIndex();
-    const currentPuzzle = puzzlesData.puzzles[currentIndex];
-    res.json(currentPuzzle);
+    const randomPuzzle = getRandomPuzzle();
+    res.json(randomPuzzle);
   } catch (error) {
     console.error('Error fetching puzzle:', error);
     res.status(500).json({ error: 'Failed to fetch puzzle' });

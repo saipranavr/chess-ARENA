@@ -29,7 +29,7 @@ const Puzzle: React.FC = () => {
   const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
   const [message, setMessage] = useState('');
   const [orientation, setOrientation] = useState<'white' | 'black'>('white');
-  const [showHint, setShowHint] = useState(false);
+  const [showHint, setShowHint] = useState<0 | 1 | 2>(0); // 0: no hint, 1: source square, 2: both squares
   const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
 
   const { data: puzzle, isLoading, error } = useQuery<PuzzleType>({
@@ -44,7 +44,7 @@ const Puzzle: React.FC = () => {
       setGame(newGame);
       setCurrentMoveIndex(0);
       setMessage(puzzle.description);
-      setShowHint(false);
+      setShowHint(0);
       setLastMove(null);
       // Set orientation based on who's turn it is
       setOrientation(puzzle.initialFEN.includes(' b ') ? 'black' : 'white');
@@ -85,6 +85,8 @@ const Puzzle: React.FC = () => {
           setCurrentMoveIndex(currentMoveIndex + 1);
           setMessage('Correct move! Keep going.');
           setLastMove(move);
+          // Hide hint after successful move
+          setShowHint(0);
 
           // Make the opponent's move if available
           const nextMove = puzzle.solutionPath[currentMoveIndex + 1];
@@ -148,7 +150,10 @@ const Puzzle: React.FC = () => {
   };
 
   const toggleHint = () => {
-    setShowHint(!showHint);
+    setShowHint((current) => {
+      if (current === 2) return 0;
+      return (current + 1) as 1 | 2;
+    });
   };
 
   if (isLoading) {
@@ -184,19 +189,36 @@ const Puzzle: React.FC = () => {
       backgroundColor: 'rgba(255, 255, 0, 0.4)',
     };
   }
+  // Add highlighting for hint squares based on hint stage
+  if (showHint > 0 && puzzle && currentMoveIndex < puzzle.solutionPath.length) {
+    const nextMove = puzzle.solutionPath[currentMoveIndex];
+    const from = nextMove.substring(0, 2);
+    const to = nextMove.substring(2, 4);
+    
+    // Stage 1: Show only source square
+    if (showHint >= 1) {
+      customSquareStyles[from] = {
+        backgroundColor: 'rgba(0, 255, 0, 0.4)',
+      };
+    }
+    // Stage 2: Show destination square
+    if (showHint === 2) {
+      customSquareStyles[to] = {
+        backgroundColor: 'rgba(0, 255, 0, 0.4)',
+      };
+    }
+  }
 
   return (
     <PageLayout>
       <div className="puzzle-container">
         <div className="puzzle-info">
-          <div className="difficulty">{puzzle.difficulty}</div>
           <div className="puzzle-message">
             <div className="x-text">{message}</div>
           </div>
           <button className="hint-button" onClick={toggleHint}>
-            {showHint ? 'Hide Hint' : 'Show Hint'}
+            {showHint === 0 ? 'Show Hint' : showHint === 1 ? 'Show Next Step' : 'Hide Hint'}
           </button>
-          {showHint && <div className="hint">{puzzle.hint}</div>}
         </div>
         <div className="puzzle-board">
           <Chessboard

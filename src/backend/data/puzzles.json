@@ -2,43 +2,75 @@
   "puzzles": [
     {
       "puzzleId": "puzzle1",
-      "initialFEN": "r1bq1rk1/pp2ppbp/2np1np1/8/3NP3/2N1B3/PPPQ1PPP/2KR1B1R w - - 0 1",
-      "solutionPath": ["d4e6", "f7e6", "d2d6"],
-      "difficulty": "Easy",
-      "description": "White to play. Find the fork that wins material.",
-      "hint": "Look for a knight move that attacks multiple pieces"
+      "initialFEN": "2r2rk1/pp2ppbp/2n3p1/2p5/4P3/2P2N2/PP3PPP/2R2RK1 w - - 0 1",
+      "solutionPath": ["f3e5", "c6e5", "c1c5", "e5d3", "c5c8", "f8c8", "f1c1", "c8c1", "f2f4"],
+      "difficulty": "Hard",
+      "description": "White to play. Find the tactical sequence to win material.",
+      "hint": "Look for a knight fork followed by a rook invasion"
     },
     {
       "puzzleId": "puzzle2",
-      "initialFEN": "4r1k1/pp3pp1/2p4p/3pN3/8/2P2P2/PP4PP/3r2K1 w - - 0 1",
-      "solutionPath": ["e5f7", "g8f7", "g2g4"],
-      "difficulty": "Medium",
-      "description": "White to play. Find the tactical sequence that wins a piece.",
-      "hint": "The knight on e5 can create a decisive threat"
+      "initialFEN": "r4rk1/ppp2ppp/2n5/8/1bPP4/2N5/PP3PPP/R1B2RK1 b - - 0 1",
+      "solutionPath": ["b4c3", "b2c3", "c6d4", "c1b2", "d4f3", "g2f3", "f8d8"],
+      "difficulty": "Hard",
+      "description": "Black to play. Find the tactical sequence to gain a decisive advantage.",
+      "hint": "The c3 square is vulnerable"
     },
     {
       "puzzleId": "puzzle3",
-      "initialFEN": "r1b2rk1/2q1bppp/p2p1n2/np2p3/3PP3/1BP2N2/PP3PPP/RN1Q1RK1 w - - 0 1",
-      "solutionPath": ["d4e5", "f6e4", "c3e4"],
-      "difficulty": "Medium",
-      "description": "White to play. Find the tactical shot that wins material.",
-      "hint": "The e5 pawn is a key target"
+      "initialFEN": "r2q1rk1/1b1nbppp/p3p3/1p6/3P4/2NB1N2/PP3PPP/R2Q1RK1 w - - 0 1",
+      "solutionPath": ["d3h7", "g8h7", "d1d7", "d8d7", "f3e5", "d7d8", "e5f7"],
+      "difficulty": "Hard",
+      "description": "White to play. Find the tactical shot that leads to a winning position.",
+      "hint": "The dark squares around black's king are weak"
     },
     {
       "puzzleId": "puzzle4",
-      "initialFEN": "2r3k1/1p3ppp/p3p3/8/8/P5P1/1P3P1P/2R3K1 b - - 0 1",
-      "solutionPath": ["c8c1", "g1f1", "c1c2"],
+      "initialFEN": "r1b2rk1/pp3ppp/2n2q2/3p4/3P4/2PB4/P4PPP/R2Q1RK1 b - - 0 1",
+      "solutionPath": ["f6f2", "g1h1", "f8e8", "d3e2", "e8e2", "d1d2", "e2e1"],
       "difficulty": "Hard",
-      "description": "Black to play. Find the winning rook maneuver.",
-      "hint": "The black rook can penetrate to the first rank"
+      "description": "Black to play. Find the winning combination.",
+      "hint": "The white king is exposed on the back rank"
     },
     {
       "puzzleId": "puzzle5",
-      "initialFEN": "r2qk2r/pb4pp/1n2Pb2/2B2Q2/p1p5/2P5/2B2PPP/RN2R1K1 w - - 0 1",
-      "solutionPath": ["f5f7", "e8f7", "e6e7"],
+      "initialFEN": "2r3k1/5ppp/2n5/1p2P3/5P2/2p5/P5PP/2R3K1 w - - 0 1",
+      "solutionPath": ["c1c3", "c6e5", "f4e5", "c8c3", "a2a4", "b5a4", "e5e6"],
       "difficulty": "Hard",
-      "description": "White to play. Find the beautiful checkmate in 2 moves.",
-      "hint": "Look for a queen sacrifice followed by a discovered check"
+      "description": "White to play. Find the winning sequence.",
+      "hint": "Control of the c-file is crucial"
+    },
+    {
+      "puzzleId": "00sHx",
+      "initialFEN": "q3k1nr/1pp1nQpp/3p4/1P2p3/4P3/B1PP1b2/B5PP/5K2 b k - 0 17",
+      "solutionPath": ["e8d7", "a2e6", "d7d8", "f7f8"],
+      "difficulty": "Hard",
+      "description": "Black to play. Find the mate in 2.",
+      "hint": "Look for a defensive king move followed by a queen mate"
+    },
+    {
+      "puzzleId": "00sJ9",
+      "initialFEN": "r3r1k1/p4ppp/2p2n2/1p6/3P1qb1/2NQR3/PPB2PP1/R1B3K1 w - - 5 18",
+      "solutionPath": ["e3g3", "e8e1", "g1h2", "e1c1", "a1c1", "f4h6", "h2g1", "h6c1"],
+      "difficulty": "Hard",
+      "description": "White to play. Find the winning combination with a fork.",
+      "hint": "The rook can be attracted to create a tactical opportunity"
+    },
+    {
+      "puzzleId": "00sJb",
+      "initialFEN": "Q1b2r1k/p2np2p/5bp1/q7/5P2/4B3/PPP3PP/2KR1B1R w - - 1 17",
+      "solutionPath": ["d1d7", "a5e1", "d7d1", "e1e3", "c1b1", "e3b6"],
+      "difficulty": "Hard",
+      "description": "White to play. Find the tactical sequence to gain advantage.",
+      "hint": "The rook move creates multiple threats"
+    },
+    {
+      "puzzleId": "00sO1",
+      "initialFEN": "1k1r4/pp3pp1/2p1p3/4b3/P3n1P1/8/KPP2PN1/3rBR1R b - - 2 31",
+      "solutionPath": ["b8c7", "e1a5", "b7b6", "f1d1"],
+      "difficulty": "Hard",
+      "description": "Black to play. Find the discovered attack.",
+      "hint": "The king move unveils a powerful attack"
     }
   ]
 } 
