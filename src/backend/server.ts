@@ -44,6 +44,27 @@ app.get('/api/puzzle/current', (req, res) => {
   }
 });
 
+// Submit puzzle completion
+app.post('/api/puzzle/submit', (req, res) => {
+  try {
+    const { puzzleId, success } = req.body;
+    
+    // For now, just log the submission
+    console.log(`Puzzle ${puzzleId} completed with ${success ? 'success' : 'failure'}`);
+    
+    res.json({ 
+      success: true, 
+      message: 'Puzzle submission recorded' 
+    });
+  } catch (error) {
+    console.error('Error submitting puzzle:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error submitting puzzle' 
+    });
+  }
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

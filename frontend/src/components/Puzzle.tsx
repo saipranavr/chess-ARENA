@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Chess } from 'chess.js';
 import { Puzzle as PuzzleType } from '../types/puzzle';
@@ -11,7 +12,15 @@ const fetchPuzzle = async (): Promise<PuzzleType> => {
   return response.data;
 };
 
+const submitPuzzle = async (puzzleId: string) => {
+  await axios.post('http://localhost:3005/api/puzzle/submit', {
+    puzzleId,
+    success: true
+  });
+};
+
 const Puzzle: React.FC = () => {
+  const navigate = useNavigate();
   const [boardSize, setBoardSize] = useState(600);
   const [game, setGame] = useState<Chess | null>(null);
   const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
@@ -79,11 +88,27 @@ const Puzzle: React.FC = () => {
               // Check if puzzle is completed after opponent's move
               if (currentMoveIndex + 2 >= puzzle.solutionPath.length) {
                 setMessage('Congratulations! Puzzle completed!');
+                // Submit puzzle completion and navigate to leaderboard
+                submitPuzzle(puzzle.puzzleId)
+                  .then(() => {
+                    setTimeout(() => navigate('/leaderboard'), 1500);
+                  })
+                  .catch(error => {
+                    console.error('Error submitting puzzle:', error);
+                  });
               }
             }, 500);
           } else {
             // If there's no next move, this was the last move
             setMessage('Congratulations! Puzzle completed!');
+            // Submit puzzle completion and navigate to leaderboard
+            submitPuzzle(puzzle.puzzleId)
+              .then(() => {
+                setTimeout(() => navigate('/leaderboard'), 1500);
+              })
+              .catch(error => {
+                console.error('Error submitting puzzle:', error);
+              });
           }
           return true;
         } else {
@@ -98,7 +123,7 @@ const Puzzle: React.FC = () => {
       console.error('Move error:', e);
       return false;
     }
-  }, [game, puzzle, currentMoveIndex]);
+  }, [game, puzzle, currentMoveIndex, navigate]);
 
   const onDrop = (sourceSquare: string, targetSquare: string): boolean => {
     if (!game) return false;
