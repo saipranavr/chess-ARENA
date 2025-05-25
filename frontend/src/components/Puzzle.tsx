@@ -29,6 +29,8 @@ const Puzzle: React.FC = () => {
   const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
   const [message, setMessage] = useState('');
   const [orientation, setOrientation] = useState<'white' | 'black'>('white');
+  const [showHint, setShowHint] = useState(false);
+  const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
 
   const { data: puzzle, isLoading, error } = useQuery<PuzzleType>({
     queryKey: ['currentPuzzle'],
@@ -42,6 +44,8 @@ const Puzzle: React.FC = () => {
       setGame(newGame);
       setCurrentMoveIndex(0);
       setMessage(puzzle.description);
+      setShowHint(false);
+      setLastMove(null);
       // Set orientation based on who's turn it is
       setOrientation(puzzle.initialFEN.includes(' b ') ? 'black' : 'white');
     }
@@ -80,6 +84,7 @@ const Puzzle: React.FC = () => {
           setGame(newGame);
           setCurrentMoveIndex(currentMoveIndex + 1);
           setMessage('Correct move! Keep going.');
+          setLastMove(move);
 
           // Make the opponent's move if available
           const nextMove = puzzle.solutionPath[currentMoveIndex + 1];
@@ -92,6 +97,7 @@ const Puzzle: React.FC = () => {
               newGame.move(opponentMove);
               setGame(new Chess(newGame.fen()));
               setCurrentMoveIndex(currentMoveIndex + 2);
+              setLastMove(opponentMove);
 
               // Check if puzzle is completed after opponent's move
               if (currentMoveIndex + 2 >= puzzle.solutionPath.length) {
@@ -141,6 +147,10 @@ const Puzzle: React.FC = () => {
     });
   };
 
+  const toggleHint = () => {
+    setShowHint(!showHint);
+  };
+
   if (isLoading) {
     return (
       <PageLayout>
@@ -165,11 +175,28 @@ const Puzzle: React.FC = () => {
     return null;
   }
 
+  const customSquareStyles: { [square: string]: React.CSSProperties } = {};
+  if (lastMove) {
+    customSquareStyles[lastMove.from] = {
+      backgroundColor: 'rgba(255, 255, 0, 0.4)',
+    };
+    customSquareStyles[lastMove.to] = {
+      backgroundColor: 'rgba(255, 255, 0, 0.4)',
+    };
+  }
+
   return (
     <PageLayout>
       <div className="puzzle-container">
-        <div className="puzzle-message">
-          <div className="x-text">{message}</div>
+        <div className="puzzle-info">
+          <div className="difficulty">{puzzle.difficulty}</div>
+          <div className="puzzle-message">
+            <div className="x-text">{message}</div>
+          </div>
+          <button className="hint-button" onClick={toggleHint}>
+            {showHint ? 'Hide Hint' : 'Show Hint'}
+          </button>
+          {showHint && <div className="hint">{puzzle.hint}</div>}
         </div>
         <div className="puzzle-board">
           <Chessboard
@@ -177,6 +204,7 @@ const Puzzle: React.FC = () => {
             boardWidth={boardSize}
             onPieceDrop={onDrop}
             boardOrientation={orientation}
+            customSquareStyles={customSquareStyles}
           />
         </div>
       </div>

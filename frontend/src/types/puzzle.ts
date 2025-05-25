@@ -4,9 +4,14 @@ export interface Puzzle {
   solutionPath: string[];
   difficulty: string;
   description: string;
+  hint: string;
 }
 
 export interface PuzzleState extends Puzzle {
   currentMoveIndex: number;
   isComplete: boolean;
+  lastMove?: {
+    from: string;
+    to: string;
+  };
 } 

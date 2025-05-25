@@ -2,24 +2,43 @@
   "puzzles": [
     {
       "puzzleId": "puzzle1",
-      "initialFEN": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1",
-      "solutionPath": ["d8h4", "g2g3", "h4e4"],
+      "initialFEN": "r1bq1rk1/pp2ppbp/2np1np1/8/3NP3/2N1B3/PPPQ1PPP/2KR1B1R w - - 0 1",
+      "solutionPath": ["d4e6", "f7e6", "d2d6"],
       "difficulty": "Easy",
-      "description": "Black to play and win material"
+      "description": "White to play. Find the fork that wins material.",
+      "hint": "Look for a knight move that attacks multiple pieces"
     },
     {
       "puzzleId": "puzzle2",
-      "initialFEN": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1",
-      "solutionPath": ["d8h4", "g2g3", "h4e4"],
+      "initialFEN": "4r1k1/pp3pp1/2p4p/3pN3/8/2P2P2/PP4PP/3r2K1 w - - 0 1",
+      "solutionPath": ["e5f7", "g8f7", "g2g4"],
       "difficulty": "Medium",
-      "description": "Black to play and checkmate in 2"
+      "description": "White to play. Find the tactical sequence that wins a piece.",
+      "hint": "The knight on e5 can create a decisive threat"
     },
     {
       "puzzleId": "puzzle3",
-      "initialFEN": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1",
-      "solutionPath": ["d8h4", "g2g3", "h4e4"],
+      "initialFEN": "r1b2rk1/2q1bppp/p2p1n2/np2p3/3PP3/1BP2N2/PP3PPP/RN1Q1RK1 w - - 0 1",
+      "solutionPath": ["d4e5", "f6e4", "c3e4"],
+      "difficulty": "Medium",
+      "description": "White to play. Find the tactical shot that wins material.",
+      "hint": "The e5 pawn is a key target"
+    },
+    {
+      "puzzleId": "puzzle4",
+      "initialFEN": "2r3k1/1p3ppp/p3p3/8/8/P5P1/1P3P1P/2R3K1 b - - 0 1",
+      "solutionPath": ["c8c1", "g1f1", "c1c2"],
       "difficulty": "Hard",
-      "description": "Black to play and find the winning combination"
+      "description": "Black to play. Find the winning rook maneuver.",
+      "hint": "The black rook can penetrate to the first rank"
+    },
+    {
+      "puzzleId": "puzzle5",
+      "initialFEN": "r2qk2r/pb4pp/1n2Pb2/2B2Q2/p1p5/2P5/2B2PPP/RN2R1K1 w - - 0 1",
+      "solutionPath": ["f5f7", "e8f7", "e6e7"],
+      "difficulty": "Hard",
+      "description": "White to play. Find the beautiful checkmate in 2 moves.",
+      "hint": "Look for a queen sacrifice followed by a discovered check"
     }
   ]
 } 
