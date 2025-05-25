@@ -5,7 +5,7 @@
   "main": "dist/backend/server.js",
   "scripts": {
     "start": "node dist/backend/server.js",
-    "dev:backend": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/backend/server.ts",
+    "dev:backend": "npm exec -- nodemon --watch src/**/*.ts --exec \"npm exec -- ts-node\" src/backend/server.ts",
     "build": "tsc",
     "dev:frontend": "cd frontend && npm start",
     "install:all": "npm install && cd frontend && npm install"
@@ -21,9 +21,9 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
-    "@types/node": "^18.15.11",
+    "@types/node": "^18.19.103",
     "nodemon": "^2.0.22",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

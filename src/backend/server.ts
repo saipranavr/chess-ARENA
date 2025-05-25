@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Read puzzles data
-const puzzlesPath = path.join(__dirname, '..', 'backend', 'data', 'puzzles.json');
+const puzzlesPath = path.join(__dirname, 'data', 'puzzles.json');
 
 let puzzlesData;
 try {
