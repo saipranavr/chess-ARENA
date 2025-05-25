@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Chess } from 'chess.js';
 import { Puzzle as PuzzleType } from '../types/puzzle';
+import PageLayout from './PageLayout';
 import './Puzzle.css';
+
+const MAX_BOARD_WIDTH = 540;
 
 const fetchPuzzle = async (): Promise<PuzzleType> => {
   const response = await axios.get('http://localhost:3005/api/puzzle/current');
@@ -21,7 +24,7 @@ const submitPuzzle = async (puzzleId: string) => {
 
 const Puzzle: React.FC = () => {
   const navigate = useNavigate();
-  const [boardSize, setBoardSize] = useState(600);
+  const [boardSize, setBoardSize] = useState(MAX_BOARD_WIDTH);
   const [game, setGame] = useState<Chess | null>(null);
   const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
   const [message, setMessage] = useState('');
@@ -46,9 +49,14 @@ const Puzzle: React.FC = () => {
 
   useEffect(() => {
     const updateBoardSize = () => {
-      const containerWidth = window.innerWidth;
+      // Get the width of the .page-card container
+      const card = document.querySelector('.page-card') as HTMLElement;
+      let containerWidth = window.innerWidth;
+      if (card) {
+        containerWidth = card.offsetWidth;
+      }
       const padding = containerWidth < 400 ? 8 : 16;
-      const newSize = Math.min(containerWidth - (padding * 2), 600);
+      const newSize = Math.min(containerWidth - (padding * 2), MAX_BOARD_WIDTH);
       setBoardSize(newSize);
     };
 
@@ -135,17 +143,21 @@ const Puzzle: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="puzzle-loading">
-        <div className="x-text">Loading...</div>
-      </div>
+      <PageLayout>
+        <div className="puzzle-loading">
+          <div className="x-text">Loading...</div>
+        </div>
+      </PageLayout>
     );
   }
 
   if (error) {
     return (
-      <div className="puzzle-error">
-        <div className="x-text">Error loading puzzle</div>
-      </div>
+      <PageLayout>
+        <div className="puzzle-error">
+          <div className="x-text">Error loading puzzle</div>
+        </div>
+      </PageLayout>
     );
   }
 
@@ -154,19 +166,21 @@ const Puzzle: React.FC = () => {
   }
 
   return (
-    <div className="puzzle-container">
-      <div className="puzzle-message">
-        <div className="x-text">{message}</div>
+    <PageLayout>
+      <div className="puzzle-container">
+        <div className="puzzle-message">
+          <div className="x-text">{message}</div>
+        </div>
+        <div className="puzzle-board">
+          <Chessboard
+            position={game.fen()}
+            boardWidth={boardSize}
+            onPieceDrop={onDrop}
+            boardOrientation={orientation}
+          />
+        </div>
       </div>
-      <div className="puzzle-board">
-        <Chessboard
-          position={game.fen()}
-          boardWidth={boardSize}
-          onPieceDrop={onDrop}
-          boardOrientation={orientation}
-        />
-      </div>
-    </div>
+    </PageLayout>
   );
 };
 

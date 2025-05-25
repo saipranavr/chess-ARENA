@@ -1,4 +1,5 @@
 import React from 'react';
+import PageLayout from './PageLayout';
 import './Leaderboard.css';
 
 interface LeaderboardEntry {
@@ -23,25 +24,27 @@ const fakeLeaderboardData: LeaderboardEntry[] = [
 
 const Leaderboard: React.FC = () => {
   return (
-    <div className="leaderboard-container">
-      <h1 className="leaderboard-title">Chess Arena Leaderboard</h1>
-      <div className="leaderboard-table">
-        <div className="leaderboard-header">
-          <div className="header-cell rank">Rank</div>
-          <div className="header-cell username">Username</div>
-          <div className="header-cell score">Score</div>
-          <div className="header-cell puzzles">Puzzles Completed</div>
-        </div>
-        {fakeLeaderboardData.map((entry) => (
-          <div key={entry.rank} className="leaderboard-row">
-            <div className="cell rank">{entry.rank}</div>
-            <div className="cell username">{entry.username}</div>
-            <div className="cell score">{entry.score}</div>
-            <div className="cell puzzles">{entry.puzzlesCompleted}</div>
+    <PageLayout>
+      <div className="leaderboard-container">
+        <h1 className="leaderboard-title">Chess Arena Leaderboard</h1>
+        <div className="leaderboard-table">
+          <div className="leaderboard-header">
+            <div className="header-cell rank">Rank</div>
+            <div className="header-cell username">Username</div>
+            <div className="header-cell score">Score</div>
+            <div className="header-cell puzzles">Puzzles Completed</div>
           </div>
-        ))}
+          {fakeLeaderboardData.map((entry) => (
+            <div key={entry.rank} className="leaderboard-row">
+              <div className="cell rank">{entry.rank}</div>
+              <div className="cell username">{entry.username}</div>
+              <div className="cell score">{entry.score}</div>
+              <div className="cell puzzles">{entry.puzzlesCompleted}</div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 
